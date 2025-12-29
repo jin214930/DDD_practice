@@ -1,15 +1,12 @@
 package com.ward.ddd.global.entity;
 
 import com.ward.ddd.global.config.EventConfig;
-import jakarta.persistence.EntityListeners;
 import jakarta.persistence.MappedSuperclass;
 import lombok.Getter;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
 
 @MappedSuperclass
-@EntityListeners(AuditingEntityListener.class)
 @Getter
 public abstract class BaseEntity {
     public abstract Long getId();

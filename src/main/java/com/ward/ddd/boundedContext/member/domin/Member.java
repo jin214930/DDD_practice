@@ -1,6 +1,6 @@
 package com.ward.ddd.boundedContext.member.domin;
 
-import com.ward.ddd.global.entity.BaseIdAndTime;
+import com.ward.ddd.shared.member.domain.SourceMember;
 import jakarta.persistence.Entity;
 import lombok.*;
 
@@ -9,7 +9,7 @@ import lombok.*;
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
-public class Member extends BaseIdAndTime {
+public class Member extends SourceMember {
     private String username;
 
     private String password;
