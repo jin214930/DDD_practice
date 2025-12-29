@@ -1,7 +1,7 @@
 package com.ward.ddd.boundedContext.post.app;
 
-import com.ward.ddd.boundedContext.member.domin.Member;
 import com.ward.ddd.boundedContext.post.domain.Post;
+import com.ward.ddd.boundedContext.post.domain.PostMember;
 import com.ward.ddd.boundedContext.post.out.PostRepository;
 import com.ward.ddd.global.event.EventPublisher;
 import com.ward.ddd.global.response.ResponseData;
@@ -19,7 +19,7 @@ public class PostWriteUseCase {
     private final MemberApiClient memberApiClient;
 
 
-    public ResponseData<Post> write(Member member, String title, String content) {
+    public ResponseData<Post> write(PostMember member, String title, String content) {
         Post post = Post.builder()
                 .title(title)
                 .content(content)

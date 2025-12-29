@@ -1,9 +1,10 @@
 package com.ward.ddd.global.initData;
 
-import com.ward.ddd.boundedContext.member.domin.Member;
 import com.ward.ddd.boundedContext.member.app.MemberFacade;
-import com.ward.ddd.boundedContext.post.domain.Post;
+import com.ward.ddd.boundedContext.member.domin.Member;
 import com.ward.ddd.boundedContext.post.app.PostFacade;
+import com.ward.ddd.boundedContext.post.domain.Post;
+import com.ward.ddd.boundedContext.post.domain.PostMember;
 import com.ward.ddd.global.response.ResponseData;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.ApplicationRunner;
@@ -50,9 +51,9 @@ public class DataInit {
     public void makeBasePosts() {
         if (postFacade.count() > 0) return;
 
-        Member user1Member = memberFacade.findByUsername("user1");
-        Member user2Member = memberFacade.findByUsername("user2");
-        Member user3Member = memberFacade.findByUsername("user3");
+        PostMember user1Member = postFacade.findMemberByUsername("user1");
+        PostMember user2Member = postFacade.findMemberByUsername("user2");
+        PostMember user3Member = postFacade.findMemberByUsername("user3");
 
         ResponseData<Post> post1RsData = postFacade.write(user1Member, "제목1", "내용1");
         log.debug(post1RsData.message());
@@ -82,9 +83,9 @@ public class DataInit {
         Post post5 = postFacade.findById(5);
         Post post6 = postFacade.findById(6);
 
-        Member user1Member = memberFacade.findByUsername("user1");
-        Member user2Member = memberFacade.findByUsername("user2");
-        Member user3Member = memberFacade.findByUsername("user3");
+        PostMember user1Member = postFacade.findMemberByUsername("user1");
+        PostMember user2Member = postFacade.findMemberByUsername("user2");
+        PostMember user3Member = postFacade.findMemberByUsername("user3");
 
         if (post1.hasComments()) return;
 

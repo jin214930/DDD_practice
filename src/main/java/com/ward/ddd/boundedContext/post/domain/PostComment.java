@@ -1,6 +1,5 @@
 package com.ward.ddd.boundedContext.post.domain;
 
-import com.ward.ddd.boundedContext.member.domin.Member;
 import com.ward.ddd.global.entity.BaseIdAndTime;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -21,5 +20,5 @@ public class PostComment extends BaseIdAndTime {
     private Post post;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    private Member author;
+    private PostMember author;
 }

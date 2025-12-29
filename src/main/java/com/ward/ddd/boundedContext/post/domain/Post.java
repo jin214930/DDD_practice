@@ -1,6 +1,5 @@
 package com.ward.ddd.boundedContext.post.domain;
 
-import com.ward.ddd.boundedContext.member.domin.Member;
 import com.ward.ddd.global.entity.BaseIdAndTime;
 import jakarta.persistence.*;
 import lombok.*;
@@ -21,7 +20,7 @@ public class Post extends BaseIdAndTime {
     private String content;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    private Member author;
+    private PostMember author;
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
     @Builder.Default
@@ -31,7 +30,7 @@ public class Post extends BaseIdAndTime {
         return !postComments.isEmpty();
     }
 
-    public PostComment addComment(Member author, String content) {
+    public PostComment addComment(PostMember author, String content) {
         PostComment comment = PostComment.builder()
                 .content(content)
                 .post(this)

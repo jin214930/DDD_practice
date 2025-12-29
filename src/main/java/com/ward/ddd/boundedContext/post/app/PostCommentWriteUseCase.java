@@ -1,8 +1,8 @@
 package com.ward.ddd.boundedContext.post.app;
 
-import com.ward.ddd.boundedContext.member.domin.Member;
 import com.ward.ddd.boundedContext.post.domain.Post;
 import com.ward.ddd.boundedContext.post.domain.PostComment;
+import com.ward.ddd.boundedContext.post.domain.PostMember;
 import com.ward.ddd.boundedContext.post.out.PostRepository;
 import com.ward.ddd.global.event.EventPublisher;
 import com.ward.ddd.global.response.ResponseData;
@@ -17,7 +17,7 @@ public class PostCommentWriteUseCase {
     private final PostRepository postRepository;
     private final EventPublisher eventPublisher;
 
-    public ResponseData<PostComment> writeComment(Post post, Member member, String content) {
+    public ResponseData<PostComment> writeComment(Post post, PostMember member, String content) {
         PostComment comment = post.addComment(member, content);
 
         postRepository.saveAndFlush(post);

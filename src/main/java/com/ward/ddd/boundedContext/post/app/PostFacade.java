@@ -1,6 +1,5 @@
 package com.ward.ddd.boundedContext.post.app;
 
-import com.ward.ddd.boundedContext.member.domin.Member;
 import com.ward.ddd.boundedContext.post.domain.Post;
 import com.ward.ddd.boundedContext.post.domain.PostComment;
 import com.ward.ddd.boundedContext.post.domain.PostMember;
@@ -28,12 +27,12 @@ public class PostFacade {
     }
 
     @Transactional
-    public ResponseData<Post> write(Member member, String title, String content) {
+    public ResponseData<Post> write(PostMember member, String title, String content) {
         return postWriteUseCase.write(member, title, content);
     }
 
     @Transactional
-    public ResponseData<PostComment> writeComment(Post post, Member member, String content) {
+    public ResponseData<PostComment> writeComment(Post post, PostMember member, String content) {
         return postCommentWriteUseCase.writeComment(post, member, content);
     }
 
@@ -57,5 +56,12 @@ public class PostFacade {
                 .build();
 
         return postMemberRepository.save(member);
+    }
+
+    @Transactional(readOnly = true)
+    public PostMember findMemberByUsername(String username) {
+        return postMemberRepository.findByUsername(username).orElseThrow(
+                () -> new DomainException(HttpStatus.NOT_FOUND.value(), "존재하지 않는 회원입니다.")
+        );
     }
 }
