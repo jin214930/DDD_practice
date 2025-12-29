@@ -40,14 +40,13 @@ public class PostFacade {
     @Transactional
     public PostMember syncMember(MemberDto memberDto) {
         PostMember member = PostMember.builder()
+                .id(memberDto.id())
+                .createdDate(memberDto.createdDate())
+                .modifiedDate(memberDto.modifiedDate())
                 .username(memberDto.username())
                 .password("")
                 .nickname(memberDto.nickname())
                 .build();
-
-        member.setId(memberDto.id());
-        member.setCreatedDate(memberDto.createdDate());
-        member.setModifiedDate(memberDto.modifiedDate());
 
         return postMemberRepository.save(member);
     }
