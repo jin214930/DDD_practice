@@ -3,7 +3,10 @@ package com.ward.ddd.boundedContext.post.service;
 import com.ward.ddd.boundedContext.member.entity.Member;
 import com.ward.ddd.boundedContext.post.entity.Post;
 import com.ward.ddd.boundedContext.post.repository.PostRepository;
+import com.ward.ddd.global.event.EventPublisher;
 import com.ward.ddd.global.exception.DomainException;
+import com.ward.ddd.shared.post.dto.PostDto;
+import com.ward.ddd.shared.post.event.PostCreatedEvent;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -13,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class PostService {
     private final PostRepository postRepository;
+    private final EventPublisher eventPublisher;
 
     @Transactional(readOnly = true)
     public long count() {
@@ -27,7 +31,7 @@ public class PostService {
                 .author(member)
                 .build();
 
-        member.increaseActivityScore(3);
+        eventPublisher.publish(new PostCreatedEvent(PostDto.from(post)));
 
         return postRepository.save(post);
     }

@@ -2,6 +2,8 @@ package com.ward.ddd.boundedContext.post.entity;
 
 import com.ward.ddd.boundedContext.member.entity.Member;
 import com.ward.ddd.global.entity.BaseIdAndTime;
+import com.ward.ddd.shared.post.dto.PostCommentDto;
+import com.ward.ddd.shared.post.event.PostCommentCreatedEvent;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -39,7 +41,7 @@ public class Post extends BaseIdAndTime {
 
         postComments.add(comment);
 
-        author.increaseActivityScore(1);
+        publishEvent(new PostCommentCreatedEvent(PostCommentDto.from(comment)));
 
         return comment;
     }

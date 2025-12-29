@@ -39,4 +39,11 @@ public class MemberService {
                 () -> new DomainException(HttpStatus.NOT_FOUND.value(), "존재하지 않는 아이디입니다.")
         );
     }
+
+    @Transactional(readOnly = true)
+    public Member findById(Long id) {
+        return memberRepository.findById(id).orElseThrow(
+                () -> new DomainException(HttpStatus.NOT_FOUND.value(), "존재하지 않는 회원입니다.")
+        );
+    }
 }
