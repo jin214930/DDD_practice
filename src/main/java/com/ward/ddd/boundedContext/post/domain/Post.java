@@ -2,8 +2,6 @@ package com.ward.ddd.boundedContext.post.domain;
 
 import com.ward.ddd.boundedContext.member.domin.Member;
 import com.ward.ddd.global.entity.BaseIdAndTime;
-import com.ward.ddd.shared.post.dto.PostCommentDto;
-import com.ward.ddd.shared.post.event.PostCommentCreatedEvent;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -11,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Table(name = "POST_POST")
 @Getter
 @Builder
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
@@ -40,8 +39,6 @@ public class Post extends BaseIdAndTime {
                 .build();
 
         postComments.add(comment);
-
-        publishEvent(new PostCommentCreatedEvent(PostCommentDto.from(comment)));
 
         return comment;
     }

@@ -2,6 +2,7 @@ package com.ward.ddd.boundedContext.post.app;
 
 import com.ward.ddd.boundedContext.member.domin.Member;
 import com.ward.ddd.boundedContext.post.domain.Post;
+import com.ward.ddd.boundedContext.post.domain.PostComment;
 import com.ward.ddd.boundedContext.post.domain.PostMember;
 import com.ward.ddd.boundedContext.post.out.PostMemberRepository;
 import com.ward.ddd.boundedContext.post.out.PostRepository;
@@ -19,6 +20,7 @@ public class PostFacade {
     private final PostRepository postRepository;
     private final PostMemberRepository postMemberRepository;
     private final PostWriteUseCase postWriteUseCase;
+    private final PostCommentWriteUseCase postCommentWriteUseCase;
 
     @Transactional(readOnly = true)
     public long count() {
@@ -28,6 +30,11 @@ public class PostFacade {
     @Transactional
     public ResponseData<Post> write(Member member, String title, String content) {
         return postWriteUseCase.write(member, title, content);
+    }
+
+    @Transactional
+    public ResponseData<PostComment> writeComment(Post post, Member member, String content) {
+        return postCommentWriteUseCase.writeComment(post, member, content);
     }
 
     @Transactional(readOnly = true)
@@ -46,6 +53,7 @@ public class PostFacade {
                 .username(memberDto.username())
                 .password("")
                 .nickname(memberDto.nickname())
+                .activityScore(memberDto.ActivityScore())
                 .build();
 
         return postMemberRepository.save(member);

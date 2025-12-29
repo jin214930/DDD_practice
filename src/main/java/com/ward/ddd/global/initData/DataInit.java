@@ -88,16 +88,19 @@ public class DataInit {
 
         if (post1.hasComments()) return;
 
-        post1.addComment(user1Member, "댓글1");
-        post1.addComment(user2Member, "댓글2");
-        post1.addComment(user3Member, "댓글3");
+        postFacade.writeComment(post1, user1Member, "댓글1");
+        postFacade.writeComment(post1, user2Member, "댓글2");
+        postFacade.writeComment(post1, user3Member, "댓글3");
 
-        post2.addComment(user2Member, "댓글4");
-        post2.addComment(user2Member, "댓글5");
+        if (post2.hasComments()) return;
 
-        post3.addComment(user3Member, "댓글6");
-        post3.addComment(user3Member, "댓글7");
+        postFacade.writeComment(post2, user2Member, "댓글4");
+        postFacade.writeComment(post2, user2Member, "댓글5");
 
-        post4.addComment(user1Member, "댓글8");
+        if (post3.hasComments()) return;
+
+        postFacade.writeComment(post3, user3Member, "댓글6");
+        postFacade.writeComment(post3, user3Member, "댓글7");
+        postFacade.writeComment(post4, user1Member, "댓글8");
     }
 }
