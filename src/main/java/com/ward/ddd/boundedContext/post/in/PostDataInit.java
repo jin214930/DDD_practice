@@ -1,7 +1,5 @@
-package com.ward.ddd.global.initData;
+package com.ward.ddd.boundedContext.member.in;
 
-import com.ward.ddd.boundedContext.member.app.MemberFacade;
-import com.ward.ddd.boundedContext.member.domin.Member;
 import com.ward.ddd.boundedContext.post.app.PostFacade;
 import com.ward.ddd.boundedContext.post.domain.Post;
 import com.ward.ddd.boundedContext.post.domain.PostMember;
@@ -11,41 +9,29 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.core.annotation.Order;
 import org.springframework.transaction.annotation.Transactional;
 
 @Configuration
 @Slf4j
-public class DataInit {
-    private final DataInit self;
-    private final MemberFacade memberFacade;
+public class PostDataInit {
+    private final PostDataInit self;
     private final PostFacade postFacade;
 
-    public DataInit(@Lazy DataInit self, MemberFacade memberFacade, PostFacade postFacade) {
+    public PostDataInit(@Lazy PostDataInit self, PostFacade postFacade) {
         this.self = self;
-        this.memberFacade = memberFacade;
         this.postFacade = postFacade;
     }
 
     @Bean
-    public ApplicationRunner baseInitDataRunner() {
+    @Order(2)
+    public ApplicationRunner postBaseInitDataRunner() {
         return args -> {
-            self.makeBaseMembers();
             self.makeBasePosts();
             self.makeBasePostComments();
         };
     }
 
-    @Transactional
-    public void makeBaseMembers() {
-        if (memberFacade.count() > 0) return;
-
-        Member systemMember = memberFacade.join("system", "1234", "시스템").data();
-        Member holdingMember = memberFacade.join("holding", "1234", "홀딩").data();
-        Member adminMember = memberFacade.join("admin", "1234", "관리자").data();
-        Member user1Member = memberFacade.join("user1", "1234", "유저1").data();
-        Member user2Member = memberFacade.join("user2", "1234", "유저2").data();
-        Member user3Member = memberFacade.join("user3", "1234", "유저3").data();
-    }
 
     @Transactional
     public void makeBasePosts() {
