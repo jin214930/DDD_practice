@@ -2,11 +2,11 @@ package com.ward.ddd.domain.post.entity;
 
 import com.ward.ddd.domain.member.entity.Member;
 import com.ward.ddd.global.entity.BaseIdAndTime;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -21,4 +21,22 @@ public class Post extends BaseIdAndTime {
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Member author;
+
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Builder.Default
+    private final List<PostComment> postComments = new ArrayList<>();
+
+    public boolean hasComments() {
+        return !postComments.isEmpty();
+    }
+
+    public void addComment(Member author, String content) {
+        PostComment comment = PostComment.builder()
+                .content(content)
+                .post(this)
+                .author(author)
+                .build();
+
+        postComments.add(comment);
+    }
 }
