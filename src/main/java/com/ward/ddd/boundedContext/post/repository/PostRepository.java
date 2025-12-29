@@ -1,6 +1,6 @@
-package com.ward.ddd.domain.post.repository;
+package com.ward.ddd.boundedContext.post.repository;
 
-import com.ward.ddd.domain.post.entity.Post;
+import com.ward.ddd.boundedContext.post.entity.Post;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface PostRepository extends JpaRepository<Post, Long> {

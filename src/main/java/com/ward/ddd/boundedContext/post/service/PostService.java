@@ -1,15 +1,13 @@
-package com.ward.ddd.domain.post.service;
+package com.ward.ddd.boundedContext.post.service;
 
-import com.ward.ddd.domain.member.entity.Member;
-import com.ward.ddd.domain.post.entity.Post;
-import com.ward.ddd.domain.post.repository.PostRepository;
+import com.ward.ddd.boundedContext.member.entity.Member;
+import com.ward.ddd.boundedContext.post.entity.Post;
+import com.ward.ddd.boundedContext.post.repository.PostRepository;
 import com.ward.ddd.global.exception.DomainException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Dictionary;
 
 @Service
 @RequiredArgsConstructor

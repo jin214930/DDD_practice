@@ -1,9 +1,9 @@
 package com.ward.ddd.global.initData;
 
-import com.ward.ddd.domain.member.entity.Member;
-import com.ward.ddd.domain.member.service.MemberService;
-import com.ward.ddd.domain.post.entity.Post;
-import com.ward.ddd.domain.post.service.PostService;
+import com.ward.ddd.boundedContext.member.entity.Member;
+import com.ward.ddd.boundedContext.member.service.MemberService;
+import com.ward.ddd.boundedContext.post.entity.Post;
+import com.ward.ddd.boundedContext.post.service.PostService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Bean;

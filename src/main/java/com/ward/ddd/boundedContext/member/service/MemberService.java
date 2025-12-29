@@ -1,15 +1,12 @@
-package com.ward.ddd.domain.member.service;
+package com.ward.ddd.boundedContext.member.service;
 
-import com.ward.ddd.domain.member.entity.Member;
-import com.ward.ddd.domain.member.repository.MemberRepository;
+import com.ward.ddd.boundedContext.member.entity.Member;
+import com.ward.ddd.boundedContext.member.repository.MemberRepository;
 import com.ward.ddd.global.exception.DomainException;
-import jakarta.servlet.http.HttpServlet;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Dictionary;
 
 @Service
 @RequiredArgsConstructor

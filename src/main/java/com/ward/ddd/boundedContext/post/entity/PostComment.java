@@ -1,6 +1,6 @@
-package com.ward.ddd.domain.post.entity;
+package com.ward.ddd.boundedContext.post.entity;
 
-import com.ward.ddd.domain.member.entity.Member;
+import com.ward.ddd.boundedContext.member.entity.Member;
 import com.ward.ddd.global.entity.BaseIdAndTime;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

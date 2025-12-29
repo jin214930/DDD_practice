@@ -1,6 +1,6 @@
-package com.ward.ddd.domain.member.repository;
+package com.ward.ddd.boundedContext.member.repository;
 
-import com.ward.ddd.domain.member.entity.Member;
+import com.ward.ddd.boundedContext.member.entity.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
