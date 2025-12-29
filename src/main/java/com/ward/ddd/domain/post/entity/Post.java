@@ -1,0 +1,24 @@
+package com.ward.ddd.domain.post.entity;
+
+import com.ward.ddd.domain.member.entity.Member;
+import com.ward.ddd.global.entity.BaseIdAndTime;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.ManyToOne;
+import lombok.*;
+
+@Entity
+@Getter
+@Builder
+@AllArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+public class Post extends BaseIdAndTime {
+    private String title;
+
+    @Column(columnDefinition = "LONGTEXT")
+    private String content;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Member author;
+}
