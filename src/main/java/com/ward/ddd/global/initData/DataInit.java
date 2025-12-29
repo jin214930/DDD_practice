@@ -4,6 +4,7 @@ import com.ward.ddd.boundedContext.member.domin.Member;
 import com.ward.ddd.boundedContext.member.app.MemberFacade;
 import com.ward.ddd.boundedContext.post.domain.Post;
 import com.ward.ddd.boundedContext.post.app.PostFacade;
+import com.ward.ddd.global.response.ResponseData;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Bean;
@@ -46,23 +47,34 @@ public class DataInit {
     }
 
     @Transactional
-    public void makeBasePosts(){
+    public void makeBasePosts() {
         if (postFacade.count() > 0) return;
 
         Member user1Member = memberFacade.findByUsername("user1");
         Member user2Member = memberFacade.findByUsername("user2");
         Member user3Member = memberFacade.findByUsername("user3");
 
-        Post post1 = postFacade.write(user1Member, "제목1", "내용1").data();
-        Post post2 = postFacade.write(user1Member, "제목2", "내용2").data();
-        Post post3 = postFacade.write(user1Member, "제목3", "내용3").data();
-        Post post4 = postFacade.write(user2Member, "제목4", "내용4").data();
-        Post post5 = postFacade.write(user2Member, "제목5", "내용5").data();
-        Post post6 = postFacade.write(user3Member, "제목6", "내용6").data();
+        ResponseData<Post> post1RsData = postFacade.write(user1Member, "제목1", "내용1");
+        log.debug(post1RsData.message());
+
+        ResponseData<Post> post2RsData = postFacade.write(user1Member, "제목2", "내용2");
+        log.debug(post2RsData.message());
+
+        ResponseData<Post> post3RsData = postFacade.write(user1Member, "제목3", "내용3");
+        log.debug(post3RsData.message());
+
+        ResponseData<Post> post4RsData = postFacade.write(user2Member, "제목4", "내용4");
+        log.debug(post4RsData.message());
+
+        ResponseData<Post> post5RsData = postFacade.write(user2Member, "제목5", "내용5");
+        log.debug(post5RsData.message());
+
+        ResponseData<Post> post6RsData = postFacade.write(user3Member, "제목6", "내용6");
+        log.debug(post6RsData.message());
     }
 
     @Transactional
-    public void makeBasePostComments(){
+    public void makeBasePostComments() {
         Post post1 = postFacade.findById(1);
         Post post2 = postFacade.findById(2);
         Post post3 = postFacade.findById(3);
