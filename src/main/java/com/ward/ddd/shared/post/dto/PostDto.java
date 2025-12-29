@@ -1,6 +1,6 @@
 package com.ward.ddd.shared.post.dto;
 
-import com.ward.ddd.boundedContext.post.entity.Post;
+import com.ward.ddd.boundedContext.post.domain.Post;
 
 import java.time.LocalDateTime;
 

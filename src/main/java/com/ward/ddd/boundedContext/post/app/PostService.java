@@ -1,8 +1,8 @@
-package com.ward.ddd.boundedContext.post.service;
+package com.ward.ddd.boundedContext.post.app;
 
-import com.ward.ddd.boundedContext.member.entity.Member;
-import com.ward.ddd.boundedContext.post.entity.Post;
-import com.ward.ddd.boundedContext.post.repository.PostRepository;
+import com.ward.ddd.boundedContext.member.domin.Member;
+import com.ward.ddd.boundedContext.post.domain.Post;
+import com.ward.ddd.boundedContext.post.out.PostRepository;
 import com.ward.ddd.global.event.EventPublisher;
 import com.ward.ddd.global.exception.DomainException;
 import com.ward.ddd.shared.post.dto.PostDto;

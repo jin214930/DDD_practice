@@ -1,4 +1,4 @@
-package com.ward.ddd.boundedContext.member.entity;
+package com.ward.ddd.boundedContext.member.domin;
 
 import com.ward.ddd.global.entity.BaseIdAndTime;
 import jakarta.persistence.Entity;

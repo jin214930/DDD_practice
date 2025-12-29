@@ -1,6 +1,6 @@
-package com.ward.ddd.boundedContext.post.entity;
+package com.ward.ddd.boundedContext.post.domain;
 
-import com.ward.ddd.boundedContext.member.entity.Member;
+import com.ward.ddd.boundedContext.member.domin.Member;
 import com.ward.ddd.global.entity.BaseIdAndTime;
 import com.ward.ddd.shared.post.dto.PostCommentDto;
 import com.ward.ddd.shared.post.event.PostCommentCreatedEvent;

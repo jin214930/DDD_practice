@@ -1,7 +1,7 @@
-package com.ward.ddd.boundedContext.member.service;
+package com.ward.ddd.boundedContext.member.app;
 
-import com.ward.ddd.boundedContext.member.entity.Member;
-import com.ward.ddd.boundedContext.member.repository.MemberRepository;
+import com.ward.ddd.boundedContext.member.domin.Member;
+import com.ward.ddd.boundedContext.member.out.MemberRepository;
 import com.ward.ddd.global.exception.DomainException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

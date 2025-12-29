@@ -1,7 +1,7 @@
-package com.ward.ddd.boundedContext.member.eventListener;
+package com.ward.ddd.boundedContext.member.in;
 
-import com.ward.ddd.boundedContext.member.entity.Member;
-import com.ward.ddd.boundedContext.member.service.MemberService;
+import com.ward.ddd.boundedContext.member.domin.Member;
+import com.ward.ddd.boundedContext.member.app.MemberService;
 import com.ward.ddd.shared.post.event.PostCommentCreatedEvent;
 import com.ward.ddd.shared.post.event.PostCreatedEvent;
 import lombok.RequiredArgsConstructor;
