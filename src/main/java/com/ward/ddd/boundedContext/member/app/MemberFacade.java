@@ -3,6 +3,7 @@ package com.ward.ddd.boundedContext.member.app;
 import com.ward.ddd.boundedContext.member.domin.Member;
 import com.ward.ddd.boundedContext.member.out.MemberRepository;
 import com.ward.ddd.global.exception.DomainException;
+import com.ward.ddd.global.response.ResponseData;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -20,7 +21,7 @@ public class MemberFacade {
     }
 
     @Transactional
-    public Member join(String username, String password, String nickname) {
+    public ResponseData<Member> join(String username, String password, String nickname) {
         return memberJoinUseCase.join(username, password, nickname);
     }
 
