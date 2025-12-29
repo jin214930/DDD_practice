@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class MemberJoinUseCase {
-    private MemberRepository memberRepository;
+    private final MemberRepository memberRepository;
 
     public Member join(String username, String password, String nickname) {
         memberRepository.findByUsername(username).ifPresent(member -> {

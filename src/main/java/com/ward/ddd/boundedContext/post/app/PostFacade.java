@@ -5,6 +5,7 @@ import com.ward.ddd.boundedContext.post.domain.Post;
 import com.ward.ddd.boundedContext.post.out.PostRepository;
 import com.ward.ddd.global.event.EventPublisher;
 import com.ward.ddd.global.exception.DomainException;
+import com.ward.ddd.global.response.ResponseData;
 import com.ward.ddd.shared.post.dto.PostDto;
 import com.ward.ddd.shared.post.event.PostCreatedEvent;
 import lombok.RequiredArgsConstructor;
@@ -24,7 +25,7 @@ public class PostFacade {
     }
 
     @Transactional
-    public Post write(Member member, String title, String content) {
+    public ResponseData<Post> write(Member member, String title, String content) {
         return postWriteUseCase.write(member, title, content);
     }
 
