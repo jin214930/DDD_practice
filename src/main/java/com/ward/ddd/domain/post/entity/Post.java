@@ -30,7 +30,7 @@ public class Post extends BaseIdAndTime {
         return !postComments.isEmpty();
     }
 
-    public void addComment(Member author, String content) {
+    public PostComment addComment(Member author, String content) {
         PostComment comment = PostComment.builder()
                 .content(content)
                 .post(this)
@@ -38,5 +38,9 @@ public class Post extends BaseIdAndTime {
                 .build();
 
         postComments.add(comment);
+
+        author.increaseActivityScore(1);
+
+        return comment;
     }
 }

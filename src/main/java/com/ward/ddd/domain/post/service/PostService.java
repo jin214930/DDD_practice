@@ -29,6 +29,8 @@ public class PostService {
                 .author(member)
                 .build();
 
+        member.increaseActivityScore(3);
+
         return postRepository.save(post);
     }
 
