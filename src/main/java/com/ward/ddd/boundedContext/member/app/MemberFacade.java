@@ -1,6 +1,7 @@
 package com.ward.ddd.boundedContext.member.app;
 
 import com.ward.ddd.boundedContext.member.domin.Member;
+import com.ward.ddd.boundedContext.member.domin.MemberPolicy;
 import com.ward.ddd.boundedContext.member.out.MemberRepository;
 import com.ward.ddd.global.exception.DomainException;
 import com.ward.ddd.global.response.ResponseData;
@@ -14,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class MemberFacade {
     private final MemberJoinUseCase memberJoinUseCase;
     private final MemberRepository memberRepository;
+    private final MemberPolicy memberPolicy;
 
     @Transactional(readOnly = true)
     public long count() {
@@ -37,5 +39,10 @@ public class MemberFacade {
         return memberRepository.findById(id).orElseThrow(
                 () -> new DomainException(HttpStatus.NOT_FOUND.value(), "존재하지 않는 회원입니다.")
         );
+    }
+
+    public String getRandomSecureTip() {
+        return "비밀번호의 유효기간은 %d일입니다."
+                .formatted(memberPolicy.getNeedToChangePasswordDays());
     }
 }
