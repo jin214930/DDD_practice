@@ -2,6 +2,7 @@ package com.ward.ddd.boundedContext.cash.app;
 
 import com.ward.ddd.boundedContext.cash.domain.CashMember;
 import com.ward.ddd.boundedContext.cash.domain.Wallet;
+import com.ward.ddd.shared.cash.dto.CashMemberDto;
 import com.ward.ddd.shared.member.dto.MemberDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -20,8 +21,8 @@ public class CashFacade {
     }
 
     @Transactional
-    public Wallet createWallet(CashMember member) {
-        return cashCreateWalletUseCase.createWallet(member);
+    public Wallet createWallet(CashMemberDto memberDto) {
+        return cashCreateWalletUseCase.createWallet(memberDto);
     }
 
     @Transactional(readOnly = true)
