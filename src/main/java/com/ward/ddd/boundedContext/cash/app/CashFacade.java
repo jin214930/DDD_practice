@@ -3,6 +3,7 @@ package com.ward.ddd.boundedContext.cash.app;
 import com.ward.ddd.boundedContext.cash.domain.CashMember;
 import com.ward.ddd.boundedContext.cash.domain.Wallet;
 import com.ward.ddd.shared.cash.dto.CashMemberDto;
+import com.ward.ddd.shared.market.event.MarketOrderPaymentRequestedEvent;
 import com.ward.ddd.shared.member.dto.MemberDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class CashFacade {
     private final CashCreateWalletUseCase cashCreateWalletUseCase;
     private final CashSyncMemberUseCase cashSyncMemberUseCase;
+    private final CashCompleteOrderPaymentUseCase cashCompleteOrderPaymentUseCase;
     private final CashSupport cashSupport;
 
     @Transactional
@@ -33,5 +35,11 @@ public class CashFacade {
     @Transactional(readOnly = true)
     public Wallet findWalletByHolder(CashMember member) {
         return cashSupport.findWalletByHolder(member);
+    }
+
+    @Transactional
+    public void handle(MarketOrderPaymentRequestedEvent event) {
+        cashCompleteOrderPaymentUseCase.handle(event);
+
     }
 }

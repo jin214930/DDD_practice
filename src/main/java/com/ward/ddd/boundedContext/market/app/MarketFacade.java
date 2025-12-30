@@ -4,6 +4,8 @@ import com.ward.ddd.boundedContext.market.domain.Cart;
 import com.ward.ddd.boundedContext.market.domain.MarketMember;
 import com.ward.ddd.boundedContext.market.domain.Order;
 import com.ward.ddd.boundedContext.market.domain.Product;
+import com.ward.ddd.shared.cash.event.CashOrderPaymentFailedEvent;
+import com.ward.ddd.shared.cash.event.CashOrderPaymentSucceededEvent;
 import com.ward.ddd.shared.market.dto.MarketMemberDto;
 import com.ward.ddd.shared.member.dto.MemberDto;
 import lombok.RequiredArgsConstructor;
@@ -17,6 +19,8 @@ public class MarketFacade {
     private final MarketCreateProductUseCase marketCreateProductUseCase;
     private final MarketCreateCartUseCase marketCreateCartUseCase;
     private final MarketCreateOrderUseCase marketCreateOrderUseCase;
+    private final MarketCancelOrderRequestPaymentUseCase marketCancelOrderRequestPaymentUseCase;
+    private final MarketCompleteOrderPaymentUseCase marketCompleteOrderPaymentUseCase;
     private final MarketSupport marketSupport;
 
     @Transactional
@@ -59,7 +63,28 @@ public class MarketFacade {
         return marketSupport.ordersCount();
     }
 
+    @Transactional
     public Order createOrder(Cart cart) {
         return marketCreateOrderUseCase.createOrder(cart);
+    }
+
+    @Transactional(readOnly = true)
+    public Order findOrderById(long id) {
+        return marketSupport.findOrderById(id);
+    }
+
+    @Transactional
+    public void requestPayment(Order order, long pgPaymentAmount) {
+        order.requestPayment(pgPaymentAmount);
+    }
+
+    @Transactional
+    public void handle(CashOrderPaymentSucceededEvent event) {
+        marketCompleteOrderPaymentUseCase.handle(event);
+    }
+
+    @Transactional
+    public void handle(CashOrderPaymentFailedEvent event) {
+        marketCancelOrderRequestPaymentUseCase.handle(event);
     }
 }

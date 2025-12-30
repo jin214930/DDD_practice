@@ -1,9 +1,12 @@
 package com.ward.ddd.boundedContext.market.domain;
 
 import com.ward.ddd.global.entity.BaseIdAndTime;
+import com.ward.ddd.shared.market.dto.OrderDto;
+import com.ward.ddd.shared.market.event.MarketOrderPaymentRequestedEvent;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +23,10 @@ public class Order extends BaseIdAndTime {
     private long price;
 
     private long salePrice;
+
+    private LocalDateTime requestPaymentDate;
+
+    private LocalDateTime paymentDate;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     @Builder.Default
@@ -48,5 +55,23 @@ public class Order extends BaseIdAndTime {
 
         price += product.getPrice();
         salePrice += product.getSalePrice();
+    }
+
+    public void completePayment() {
+        paymentDate = LocalDateTime.now();
+    }
+
+    public void requestPayment(long pgPaymentAmount) {
+        requestPaymentDate = LocalDateTime.now();
+
+        publishEvent(new MarketOrderPaymentRequestedEvent(OrderDto.from(this), pgPaymentAmount));
+    }
+
+    public boolean isPaid() {
+        return paymentDate != null;
+    }
+
+    public void cancelRequestPayment() {
+        requestPaymentDate = null;
     }
 }

@@ -2,6 +2,7 @@ package com.ward.ddd.boundedContext.market.app;
 
 import com.ward.ddd.boundedContext.market.domain.Cart;
 import com.ward.ddd.boundedContext.market.domain.MarketMember;
+import com.ward.ddd.boundedContext.market.domain.Order;
 import com.ward.ddd.boundedContext.market.domain.Product;
 import com.ward.ddd.boundedContext.market.out.CartRepository;
 import com.ward.ddd.boundedContext.market.out.MarketMemberRepository;
@@ -45,5 +46,11 @@ public class MarketSupport {
 
     public long ordersCount() {
         return orderRepository.count();
+    }
+
+    public Order findOrderById(long id) {
+        return orderRepository.findById(id).orElseThrow(
+                () -> new DomainException(HttpStatus.NOT_FOUND.value(), "존재하지 않는 주문입니다.")
+        );
     }
 }
