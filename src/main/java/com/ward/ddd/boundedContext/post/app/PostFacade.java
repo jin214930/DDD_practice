@@ -3,27 +3,23 @@ package com.ward.ddd.boundedContext.post.app;
 import com.ward.ddd.boundedContext.post.domain.Post;
 import com.ward.ddd.boundedContext.post.domain.PostComment;
 import com.ward.ddd.boundedContext.post.domain.PostMember;
-import com.ward.ddd.boundedContext.post.out.PostMemberRepository;
-import com.ward.ddd.boundedContext.post.out.PostRepository;
-import com.ward.ddd.global.exception.DomainException;
 import com.ward.ddd.global.response.ResponseData;
 import com.ward.ddd.shared.member.dto.MemberDto;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
 public class PostFacade {
-    private final PostRepository postRepository;
-    private final PostMemberRepository postMemberRepository;
     private final PostWriteUseCase postWriteUseCase;
     private final PostCommentWriteUseCase postCommentWriteUseCase;
+    private final PostSyncMemberUseCase postSyncMemberUseCase;
+    private final PostSupport postSupport;
 
     @Transactional(readOnly = true)
     public long count() {
-        return postRepository.count();
+        return postSupport.count();
     }
 
     @Transactional
@@ -38,30 +34,16 @@ public class PostFacade {
 
     @Transactional(readOnly = true)
     public Post findById(long id) {
-        return postRepository.findById(id).orElseThrow(
-                () -> new DomainException(HttpStatus.NOT_FOUND.value(), "존재하지 않는 게시글입니다.")
-        );
+        return postSupport.findById(id);
     }
 
     @Transactional
     public PostMember syncMember(MemberDto memberDto) {
-        PostMember member = PostMember.builder()
-                .id(memberDto.id())
-                .createdDate(memberDto.createdDate())
-                .modifiedDate(memberDto.modifiedDate())
-                .username(memberDto.username())
-                .password("")
-                .nickname(memberDto.nickname())
-                .activityScore(memberDto.activityScore())
-                .build();
-
-        return postMemberRepository.save(member);
+        return postSyncMemberUseCase.syncMember(memberDto);
     }
 
     @Transactional(readOnly = true)
     public PostMember findMemberByUsername(String username) {
-        return postMemberRepository.findByUsername(username).orElseThrow(
-                () -> new DomainException(HttpStatus.NOT_FOUND.value(), "존재하지 않는 회원입니다.")
-        );
+        return postSupport.findMemberByUsername(username);
     }
 }
