@@ -1,0 +1,30 @@
+package com.ward.ddd.shared.post.out;
+
+import com.ward.ddd.shared.post.dto.PostDto;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestClient;
+
+import java.util.List;
+
+@Service
+public class PostApiClient {
+    private final RestClient restClient = RestClient.builder()
+            .baseUrl("http://localhost:8080/api/v1/post")
+            .build();
+
+    public List<PostDto> getPosts() {
+        return restClient.get()
+                .uri("/posts")
+                .retrieve()
+                .body(new ParameterizedTypeReference<>() {
+                });
+    }
+
+    public PostDto getPost(long id) {
+        return restClient.get()
+                .uri("/posts/%d".formatted(id))
+                .retrieve()
+                .body(PostDto.class);
+    }
+}
