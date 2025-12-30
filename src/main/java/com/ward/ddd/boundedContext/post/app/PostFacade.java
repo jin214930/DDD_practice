@@ -52,7 +52,7 @@ public class PostFacade {
                 .username(memberDto.username())
                 .password("")
                 .nickname(memberDto.nickname())
-                .activityScore(memberDto.ActivityScore())
+                .activityScore(memberDto.activityScore())
                 .build();
 
         return postMemberRepository.save(member);

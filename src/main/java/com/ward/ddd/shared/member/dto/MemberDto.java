@@ -10,7 +10,7 @@ public record MemberDto(
         LocalDateTime modifiedDate,
         String username,
         String nickname,
-        int ActivityScore
+        int activityScore
 ) {
     public static MemberDto from(Member member) {
         return new MemberDto(

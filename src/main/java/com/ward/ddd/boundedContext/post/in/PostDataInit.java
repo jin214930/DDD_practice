@@ -1,4 +1,4 @@
-package com.ward.ddd.boundedContext.member.in;
+package com.ward.ddd.boundedContext.post.in;
 
 import com.ward.ddd.boundedContext.post.app.PostFacade;
 import com.ward.ddd.boundedContext.post.domain.Post;
