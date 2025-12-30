@@ -1,7 +1,9 @@
 package com.ward.ddd.boundedContext.market.app;
 
+import com.ward.ddd.boundedContext.market.domain.Cart;
 import com.ward.ddd.boundedContext.market.domain.MarketMember;
 import com.ward.ddd.boundedContext.market.domain.Product;
+import com.ward.ddd.shared.market.dto.MarketMemberDto;
 import com.ward.ddd.shared.member.dto.MemberDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -12,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class MarketFacade {
     private final MarketSyncMemberUseCase marketSyncMemberUseCase;
     private final MarketCreateProductUseCase marketCreateProductUseCase;
+    private final MarketCreateCartUseCase marketCreateCartUseCase;
     private final MarketSupport marketSupport;
 
     @Transactional
@@ -32,5 +35,20 @@ public class MarketFacade {
     @Transactional
     public Product createProduct(MarketMember member, String sourceTypeCode, Long sourceId, String name, String description, long price, long salePrice) {
         return marketCreateProductUseCase.createProduct(member, sourceTypeCode, sourceId, name, description, price, salePrice);
+    }
+
+    @Transactional(readOnly = true)
+    public Cart findCartByBuyer(MarketMember member) {
+        return marketSupport.findCartByBuyer(member);
+    }
+
+    @Transactional(readOnly = true)
+    public Product findProductById(long id) {
+        return marketSupport.findProductById(id);
+    }
+
+    @Transactional
+    public Cart createCart(MarketMemberDto memberDto) {
+        return marketCreateCartUseCase.createCart(memberDto);
     }
 }
