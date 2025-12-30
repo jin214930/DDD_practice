@@ -24,7 +24,7 @@ public class Post extends BaseIdAndTime {
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
     @Builder.Default
-    private final List<PostComment> postComments = new ArrayList<>();
+    private List<PostComment> postComments = new ArrayList<>();
 
     public boolean hasComments() {
         return !postComments.isEmpty();

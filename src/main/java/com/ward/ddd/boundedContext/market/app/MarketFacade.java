@@ -2,6 +2,7 @@ package com.ward.ddd.boundedContext.market.app;
 
 import com.ward.ddd.boundedContext.market.domain.Cart;
 import com.ward.ddd.boundedContext.market.domain.MarketMember;
+import com.ward.ddd.boundedContext.market.domain.Order;
 import com.ward.ddd.boundedContext.market.domain.Product;
 import com.ward.ddd.shared.market.dto.MarketMemberDto;
 import com.ward.ddd.shared.member.dto.MemberDto;
@@ -15,6 +16,7 @@ public class MarketFacade {
     private final MarketSyncMemberUseCase marketSyncMemberUseCase;
     private final MarketCreateProductUseCase marketCreateProductUseCase;
     private final MarketCreateCartUseCase marketCreateCartUseCase;
+    private final MarketCreateOrderUseCase marketCreateOrderUseCase;
     private final MarketSupport marketSupport;
 
     @Transactional
@@ -50,5 +52,14 @@ public class MarketFacade {
     @Transactional
     public Cart createCart(MarketMemberDto memberDto) {
         return marketCreateCartUseCase.createCart(memberDto);
+    }
+
+    @Transactional(readOnly = true)
+    public long ordersCount() {
+        return marketSupport.ordersCount();
+    }
+
+    public Order createOrder(Cart cart) {
+        return marketCreateOrderUseCase.createOrder(cart);
     }
 }

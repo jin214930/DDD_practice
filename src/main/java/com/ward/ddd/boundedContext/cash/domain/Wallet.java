@@ -23,7 +23,7 @@ public class Wallet extends BaseManualIdAndTime {
 
     @OneToMany(mappedBy = "wallet", cascade = CascadeType.ALL, orphanRemoval = true)
     @Builder.Default
-    private final List<CashLog> cashLogs = new ArrayList<>();
+    private List<CashLog> cashLogs = new ArrayList<>();
 
     public boolean hasBalance() {
         return balance > 0;

@@ -20,7 +20,7 @@ public class Cart extends BaseManualIdAndTime {
 
     @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true)
     @Builder.Default
-    private final List<CartItem> items = new ArrayList<>();
+    private List<CartItem> items = new ArrayList<>();
 
     private int itemsCount;
 
