@@ -35,6 +35,8 @@ custom:
   global:
     internalBackUrl: http://localhost:${server.port}
     holdingMemberId: 2
+  payout:
+    readyWaitingDays: 14
   member:
     password:
       changeDays: 90

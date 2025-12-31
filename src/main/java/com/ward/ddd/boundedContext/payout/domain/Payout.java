@@ -26,4 +26,20 @@ public class Payout extends BaseIdAndTime {
     @OneToMany(mappedBy = "payout", cascade = CascadeType.ALL, orphanRemoval = true)
     @Builder.Default
     private List<PayoutItem> items = new ArrayList<>();
+
+    public PayoutItem addItem(PayoutEventType eventType, String relatedTypeCode, Long relatedId, LocalDateTime paymentDate, PayoutMember payer, PayoutMember payee, long amount) {
+        PayoutItem payoutItem = PayoutItem.builder()
+                .eventType(eventType)
+                .relatedTypeCode(relatedTypeCode)
+                .relatedId(relatedId)
+                .paymentDate(paymentDate)
+                .payer(payer)
+                .payee(payee)
+                .amount(amount)
+                .build();
+
+        items.add(payoutItem);
+
+        return payoutItem;
+    }
 }
