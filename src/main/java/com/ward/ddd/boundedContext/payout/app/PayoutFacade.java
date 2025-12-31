@@ -1,5 +1,6 @@
 package com.ward.ddd.boundedContext.payout.app;
 
+import com.ward.ddd.boundedContext.payout.domain.Payout;
 import com.ward.ddd.boundedContext.payout.domain.PayoutMember;
 import com.ward.ddd.shared.market.dto.OrderDto;
 import com.ward.ddd.shared.member.dto.MemberDto;
@@ -20,8 +21,8 @@ public class PayoutFacade {
         return payoutSyncMemberUseCase.syncMember(memberDto);
     }
 
-    public void createPayout(PayoutMemberDto memberDto) {
-        payoutCreatePayoutUseCase.createPayout(memberDto);
+    public Payout createPayout(PayoutMemberDto memberDto) {
+        return payoutCreatePayoutUseCase.createPayout(memberDto);
     }
 
     public void addPayoutCandidateItems(OrderDto orderDto) {
