@@ -3,6 +3,7 @@ package com.ward.ddd.boundedContext.cash.app;
 import com.ward.ddd.boundedContext.cash.domain.CashMember;
 import com.ward.ddd.boundedContext.cash.domain.Wallet;
 import com.ward.ddd.shared.cash.dto.CashMemberDto;
+import com.ward.ddd.shared.market.dto.OrderDto;
 import com.ward.ddd.shared.market.event.MarketOrderPaymentRequestedEvent;
 import com.ward.ddd.shared.member.dto.MemberDto;
 import lombok.RequiredArgsConstructor;
@@ -38,8 +39,8 @@ public class CashFacade {
     }
 
     @Transactional
-    public void handle(MarketOrderPaymentRequestedEvent event) {
-        cashCompleteOrderPaymentUseCase.handle(event);
+    public void completeOrderPayment(OrderDto orderDto, long pgPaymentAmount) {
+        cashCompleteOrderPaymentUseCase.completeOrderPayment(orderDto, pgPaymentAmount);
 
     }
 
