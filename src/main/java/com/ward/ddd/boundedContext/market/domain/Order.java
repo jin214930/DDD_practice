@@ -2,6 +2,7 @@ package com.ward.ddd.boundedContext.market.domain;
 
 import com.ward.ddd.global.entity.BaseIdAndTime;
 import com.ward.ddd.shared.market.dto.OrderDto;
+import com.ward.ddd.shared.market.event.MarketOrderPaymentCompletedEvent;
 import com.ward.ddd.shared.market.event.MarketOrderPaymentRequestedEvent;
 import jakarta.persistence.*;
 import lombok.*;
@@ -61,6 +62,8 @@ public class Order extends BaseIdAndTime {
 
     public void completePayment() {
         paymentDate = LocalDateTime.now();
+
+        publishEvent(new MarketOrderPaymentCompletedEvent(OrderDto.from(this)));
     }
 
     public void requestPayment(long pgPaymentAmount) {

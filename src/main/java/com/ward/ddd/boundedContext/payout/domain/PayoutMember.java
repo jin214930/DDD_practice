@@ -1,5 +1,4 @@
-package com.ward.ddd.boundedContext.cash.domain;
-
+package com.ward.ddd.boundedContext.payout.domain;
 
 import com.ward.ddd.shared.member.domain.ReplicaMember;
 import jakarta.persistence.Entity;
@@ -9,8 +8,8 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 @Entity
-@Getter
 @SuperBuilder
+@Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class CashMember extends ReplicaMember {
+public class PayoutMember extends ReplicaMember {
 }

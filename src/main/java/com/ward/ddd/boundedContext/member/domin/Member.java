@@ -6,30 +6,22 @@ import com.ward.ddd.shared.member.event.MemberModifiedEvent;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 @Entity
 @Table(name = "MEMBER_MEMBER")
 @Getter
-@Builder
+@SuperBuilder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor(access = AccessLevel.PROTECTED)
 public class Member extends SourceMember {
-    private String username;
-
-    private String password;
-
-    private String nickname;
-
-    private int activityScore;
-
     public int increaseActivityScore(int amount) {
         if (amount == 0)
             return getActivityScore();
 
-        activityScore = activityScore + amount;
+        setActivityScore(getActivityScore() + amount);
 
         publishEvent(new MemberModifiedEvent(MemberDto.from(this)));
 
-        return activityScore;
+        return getActivityScore();
     }
 }
