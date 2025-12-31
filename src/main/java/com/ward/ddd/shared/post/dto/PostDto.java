@@ -1,6 +1,7 @@
 package com.ward.ddd.shared.post.dto;
 
 import com.ward.ddd.boundedContext.post.domain.Post;
+import com.ward.ddd.standard.modelType.HasModelTypeCode;
 
 import java.time.LocalDateTime;
 
@@ -12,7 +13,7 @@ public record PostDto(
         String authorName,
         String title,
         String content
-) {
+) implements HasModelTypeCode {
     public static PostDto from(Post post) {
         return new PostDto(
                 post.getId(),
@@ -23,5 +24,10 @@ public record PostDto(
                 post.getTitle(),
                 post.getContent()
         );
+    }
+
+    @Override
+    public String getModelTypeCode() {
+        return "Post";
     }
 }

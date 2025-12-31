@@ -1,6 +1,7 @@
 package com.ward.ddd.shared.market.dto;
 
 import com.ward.ddd.boundedContext.market.domain.Order;
+import com.ward.ddd.standard.modelType.HasModelTypeCode;
 
 import java.time.LocalDateTime;
 
@@ -14,7 +15,7 @@ public record OrderDto(
         long salePrice,
         LocalDateTime requestPaymentDate,
         LocalDateTime paymentDate
-) {
+) implements HasModelTypeCode {
     public static OrderDto from(Order order) {
         return new OrderDto(
                 order.getId(),
@@ -27,5 +28,10 @@ public record OrderDto(
                 order.getRequestPaymentDate(),
                 order.getPaymentDate()
         );
+    }
+
+    @Override
+    public String getModelTypeCode() {
+        return "Order";
     }
 }

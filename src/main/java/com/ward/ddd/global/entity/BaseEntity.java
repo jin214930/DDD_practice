@@ -1,6 +1,7 @@
 package com.ward.ddd.global.entity;
 
 import com.ward.ddd.global.config.EventConfig;
+import com.ward.ddd.standard.modelType.HasModelTypeCode;
 import jakarta.persistence.MappedSuperclass;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -13,7 +14,7 @@ import java.time.LocalDateTime;
 @Getter
 @SuperBuilder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public abstract class BaseEntity {
+public abstract class BaseEntity implements HasModelTypeCode {
     public abstract Long getId();
 
     public abstract LocalDateTime getCreatedDate();
