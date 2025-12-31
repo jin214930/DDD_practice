@@ -5,6 +5,7 @@ import com.ward.ddd.boundedContext.market.domain.Order;
 import com.ward.ddd.global.exception.DomainException;
 import com.ward.ddd.global.response.ResponseData;
 import com.ward.ddd.shared.cash.out.CashApiClient;
+import com.ward.ddd.shared.market.dto.OrderItemDto;
 import com.ward.ddd.shared.market.out.TossPaymentsService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
@@ -13,6 +14,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/market/orders")
@@ -72,5 +75,16 @@ public class ApiV1OrderController {
         marketFacade.requestPayment(order, request.amount());
 
         return ResponseData.from(HttpStatus.ACCEPTED.value(), "결제 프로세스가 시작되었습니다.");
+    }
+
+    @GetMapping("/{id}/items")
+    @Transactional(readOnly = true)
+    public List<OrderItemDto> getItems(@PathVariable long id) {
+        return marketFacade
+                .findOrderById(id)
+                .getItems()
+                .stream()
+                .map(OrderItemDto::from)
+                .toList();
     }
 }
