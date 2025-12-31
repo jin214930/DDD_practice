@@ -38,8 +38,8 @@ public record OrderItemDto(
                 orderItem.getOrder().getPrice(),
                 orderItem.getOrder().getSalePrice(),
                 orderItem.getPayoutRate(),
-                MarketPolicy.calculatePayoutFee(orderItem.getOrder().getSalePrice(), orderItem.getPayoutRate()),
-                MarketPolicy.calculateSalePriceWithoutFee(orderItem.getOrder().getSalePrice(), orderItem.getPayoutRate())
+                MarketPolicy.calculatePayoutFee(orderItem.getSalePrice(), orderItem.getPayoutRate()),
+                MarketPolicy.calculateSalePriceWithoutFee(orderItem.getSalePrice(), orderItem.getPayoutRate())
         );
     }
 

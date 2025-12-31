@@ -31,6 +31,8 @@ public class PayoutAddPayoutCandidateItemsUseCase {
         PayoutMember buyer = payoutSupport.findMemberById(orderDto.buyerId());
         PayoutMember seller = payoutSupport.findMemberById(item.sellerId());
 
+        System.out.println(item.payoutFee() + " " + item.salePriceWithoutFee() + "\n");
+
         makePayoutCandidateItem(
                 PayoutEventType.정산__상품판매_수수료,
                 item.getModelTypeCode(),
